@@ -209,4 +209,14 @@ public class ServicioDoctorService {
         return  pdfResult;
     }
 
+    public ByteArrayOutputStream getListServicioDoctorPdfByServicioAndAnioAndMes2(Long idServicio, Long idAnio)
+    {
+        ByteArrayOutputStream pdfResult = null;
+        List<ServicioDoctor> servicioDoctorList = findAllByServiceIdAndPeriod2(idServicio, idAnio);
+        ServicioDoctorPorPeriodoServicioPdf servicioDoctorPorPeriodoServicioPdf = new ServicioDoctorPorPeriodoServicioPdf();
+        AnioAcademico anioAcademico = anioAcademicoService.findById(idAnio).get();
+        pdfResult = servicioDoctorPorPeriodoServicioPdf.getListDoctors(servicioDoctorList, anioAcademico, idServicio);
+        return  pdfResult;
+    }
+
 }

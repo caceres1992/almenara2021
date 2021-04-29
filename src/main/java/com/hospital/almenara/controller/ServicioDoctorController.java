@@ -132,4 +132,16 @@ public class ServicioDoctorController
         headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
         return new ResponseEntity<>(contents, headers, HttpStatus.OK);
     }
+
+    @GetMapping("/vr2/pdf/medicos-residentes-otras-especialidades-por-periodo/{idServicio}/{idAnio}")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+    public ResponseEntity<byte[]> getListServicioDoctorPdfByServicioAndAnioAndMes2(@PathVariable Long idServicio, @PathVariable Long idAnio)
+    {
+        byte[] contents = service.getListServicioDoctorPdfByServicioAndAnioAndMes2(idServicio, idAnio).toByteArray();
+        HttpHeaders headers = new HttpHeaders();
+        String filename = "Relacion-medicos-residentes-otras-especialidades-por-periodo.pdf";
+        headers.setContentDispositionFormData(filename, filename);
+        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+        return new ResponseEntity<>(contents, headers, HttpStatus.OK);
+    }
 }
