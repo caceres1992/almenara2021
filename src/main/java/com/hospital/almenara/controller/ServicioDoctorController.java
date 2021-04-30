@@ -38,6 +38,12 @@ public class ServicioDoctorController
         return service.findAllBySpecialty(idSpecialty);
     }
 
+    @GetMapping("/vr2/{idSpecialty}")
+    @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
+    public List<ServicioDoctor> find2(@PathVariable Long idSpecialty){
+        return service.findAllBySpecialty2(idSpecialty);
+    }
+
     @GetMapping("/report/{idServicio}/{idAnio}")
     @PreAuthorize("hasRole('ADMIN') OR hasRole('USER')")
     public List<ServicioDoctor> findByServicioAndAnioAndMes(@PathVariable Long idServicio, @PathVariable Long idAnio)

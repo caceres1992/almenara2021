@@ -44,7 +44,12 @@ public class ServicioDoctorService {
 
 
     public List<ServicioDoctor> findAllBySpecialty(Long idSpecialty){
-        return repository.findAllByDoctorSpecialtyId(idSpecialty);
+        return repository.findAllByDoctorSpecialtyId(idSpecialty).stream().filter(servicioDoctor -> servicioDoctor.getDoctor().getGrupo() ==null).collect(Collectors.toList());
+    }
+
+    public List<ServicioDoctor> findAllBySpecialty2(Long idSpecialty){
+        return repository.findAllByDoctorSpecialtyId(idSpecialty).stream().filter(servicioDoctor -> servicioDoctor.getDoctor().getGrupo() !=null).collect(Collectors.toList());
+
     }
 
     public ByteArrayOutputStream getListServicioDoctorsPdf() {
