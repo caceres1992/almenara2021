@@ -70,7 +70,7 @@ public class DoctorController {
 
         if (repository.existsByDocument(doctor.getDocument())) {
             return ResponseEntity.badRequest().body(new MessageResponse(doctor.getDocument() + " ya se encuentra registrado. Ingresa otro Nro. Documento."));
-        } else if (repository.existsByCmp(doctor.getCmp())) {
+        } else if (repository.existsByCmp(doctor.getCmp()) && !doctor.getCmp().isEmpty()) {
             return ResponseEntity.badRequest().body(new MessageResponse(doctor.getCmp() + " ya se encuentra registrado. Ingresa otro CMP."));
         } else {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.create(doctor));
